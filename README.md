@@ -200,6 +200,7 @@
 - [Sanic](https://github.com/channelcat/sanic): Async Python 3.5+ web server that's written to go fast
 - [shortuuid](https://github.com/skorokithakis/shortuuid): A generator library for concise, unambiguous and URL-safe UUIDs. <http://www.stavros.io/>
 - [sqlalchemy](https://github.com/zzzeek/sqlalchemy): See the development link for contribution guidelines <http://sqlalchemy.org/develop.html>
+- [aiofiles](https://github.com/Tinche/aiofiles): File support for asyncio
 
 # 相关文章
 - [一个实现App在线下载、安装的工具​](http://skytoup.wicp.net/2017/03/01/%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%8E%B0App%E5%9C%A8%E7%BA%BF%E4%B8%8B%E8%BD%BD%E3%80%81%E5%AE%89%E8%A3%85%E7%9A%84%E5%B7%A5%E5%85%B7/)

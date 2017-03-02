@@ -38,11 +38,5 @@ class IPAPlist:
     '''
 
     @classmethod
-    def create(cls, url: str, bundle: str, version: str, title: str, path: str) -> bool:
-        with open(path, 'w+') as f:
-            f.write(cls.parse(url, bundle, version, title))
-            return True
-
-    @classmethod
     def parse(cls, url: str, bundle: str, version: str, title: str) -> str:
         return cls.__plist_template.format(url, bundle, version, title)

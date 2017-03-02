@@ -2,6 +2,7 @@
 # Created by apple on 2017/1/31.
 
 import re
+import aiofiles
 import plistlib
 from .regex import Regex
 from ..log import log
@@ -135,6 +136,5 @@ class PackageParse:
         self.version_code = version_code
 
     async def save_icon(self, save_path):
-        with open(save_path, 'wb+') as f:
-            f.write(self.zip_file.read(self.icon_path))
-            log.debug('save icon success: {}'.format(save_path))
+        async with aiofiles.open(save_path, 'wb+') as f:
+            await f.write(self.zip_file.read(self.icon_path))

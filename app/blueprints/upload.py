@@ -3,6 +3,7 @@
 
 import os
 import time
+import aiofiles
 from ..log import log
 from sanic import Blueprint
 from ..config import Config
@@ -49,8 +50,8 @@ class UploadApp(HTTPMethodView):
         file_path = '{}/{}'.format(Config.app_dir, file_name)
 
         # 保存安装包
-        with open(file_path, 'wb+') as f:
-            f.write(file.body)
+        async with aiofiles.open(file_path, 'wb+') as f:
+            await f.write(file.body)
             log.debug('save upload success: {}'.format(file_path))
 
         package = await PackageParse.parse(file_path)
