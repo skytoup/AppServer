@@ -92,8 +92,7 @@ class AppVersionView(HTTPMethodView):
         return JsonResult.ok().response_json()
 
 
-# FIXME: - 升级到Sanic 0.3.1 之后, 不传methods会报错
-app_versions_blueprint.add_route(AppVersionView.as_view(), '/<package_id:string>', ['OPTIONS', 'DELETE'])
+app_versions_blueprint.add_route(AppVersionView.as_view(), '/<package_id:string>')
 
 
 @app_versions_blueprint.route('/<package_id:string>/plist')

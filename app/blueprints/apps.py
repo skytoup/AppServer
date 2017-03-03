@@ -157,5 +157,4 @@ class AppsView(HTTPMethodView):
         return JsonResult.ok().response_json()
 
 
-# FIXME: - 升级到Sanic 0.3.1 之后, 不传methods会报错
-apps_blueprint.add_route(AppsView.as_view(), '/<app_id:int>', ['GET', 'DELETE', 'PUT', 'OPTIONS'])
+apps_blueprint.add_route(AppsView.as_view(), '/<app_id:int>')
