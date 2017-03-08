@@ -117,4 +117,4 @@ def get_plist(request: Request, app_id: int, package_id: str):
 
     app = app_query.one()
     app_version = app_version_query.one()
-    return text(IPAPlist.parse(app_version.package, app.package_name, app_version.version_name, '点击确认安装'))
+    return text(IPAPlist.parse(app_version.package, app.package_name, app_version.version_name, app.name))

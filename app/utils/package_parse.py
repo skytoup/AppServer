@@ -81,19 +81,24 @@ class PackageParse:
         plist_data = ipa_file.read(plist_path)
         plist_file = plistlib.loads(plist_data)
 
-        # 解析icon
-        if plist_file.get('CFBundleIcons'):
-            icon_dict = plist_file['CFBundleIcons']
-        elif plist_file.get('CFBundleIcons'):
-            icon_dict = plist_file['CFBundleIcons~ipad']
+        # 解析icon'CFBundleIconFiles' (4400546488)
+        if plist_file.get('CFBundleIconFiles'):
+            icon_name = plist_file['CFBundleIconFiles'][-1]
         else:
-            log.warning('parse icon failure: {}'.format(file_path))
-            return
-        icon_name = icon_dict['CFBundlePrimaryIcon']['CFBundleIconFiles'][-1]
+            if plist_file.get('CFBundleIcons'):
+                icon_dict = plist_file['CFBundleIcons']
+            elif plist_file.get('CFBundleIcons'):
+                icon_dict = plist_file['CFBundleIcons~ipad']
+            else:
+                log.warning('parse icon failure: {}'.format(file_path))
+                return
+            icon_name = icon_dict['CFBundlePrimaryIcon']['CFBundleIconFiles'][-1]
+
         log.debug('parse icon name: {}'.format(icon_name))
 
         # 获取icon路径
-        re_icon_name = re.compile('([^/]+/){{2}}{}(@\dx)\.png'.format(icon_name))
+        re_icon_name_end = '(@\dx)\.png' if not icon_name.endswith('.png') else ''
+        re_icon_name = re.compile('([^/]+/){{2}}{}{}'.format(icon_name, re_icon_name_end))
         ns = [n for n in ipa_file.namelist() if re_icon_name.match(n)]
         if not ns:
             log.warning('read icon failure: {}'.format(file_path))
