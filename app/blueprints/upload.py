@@ -60,9 +60,12 @@ class UploadApp(HTTPMethodView):
             raise BadRequest('the file is not support')
 
         app_query = session.query(AppModel).filter_by(package_name=package.package_name, type=package.app_type)
+
         if app_query.count():  # 已存在
+            exists = True
             app = app_query.one()
         else:  # 不存在
+            exists = False
             # 生成短链
             while 1:
                 short_chain = random(8)
@@ -91,7 +94,8 @@ class UploadApp(HTTPMethodView):
         session.add(app_version)
         session.commit()
 
-        return JsonResult.ok().response_json()
+        # app不存在时, 返回app信息
+        return JsonResult.ok(app if not exists else None).response_json()
 
 
 upload_blueprint.add_route(UploadApp.as_view(), '/app')

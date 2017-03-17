@@ -88,11 +88,18 @@
 | pcakage | y | 上传的安装包 |
 | msg | n | 更新说明 |
 
-> 返回datas: 无
+> 返回datas: object or not(上传不存在的App时, 才有返回)
 
 | 参数 | 描述 |
 | --- | --- |
-|  |  |
+| id | App的id |
+| type | 安装包类型, 0: iOS, 1: Android |
+| name | 名称 |
+| icon | 图标 |
+| detail | 介绍 |
+| short_chain | 短链接 |
+| package_name | 包名 |
+| create_at | 创建时间 |
 
 ### 获取App列表
 	GET /apps/<app_type>/page/<page>?t=<time>
