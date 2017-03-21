@@ -79,6 +79,8 @@ class UploadApp(HTTPMethodView):
                            icon_uri_='{}/{}'.format(Config.static_icon, icon_name))
             session.add(app)
             session.commit()
+            app.version_code = package.version_code
+            app.version_name = package.version_name
 
         # 保存图标
         await package.save_icon(app.icon_)
