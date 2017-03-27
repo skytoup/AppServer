@@ -32,6 +32,8 @@ async def get_apps(request: Request, app_type: str, page: int):
         log.debug('page need greater zero')
         raise BadRequest('')
 
+    kw = request.args.get('kw')
+
     session = Session()
     query = session.query(AppModel, AppVersionModel.version_code, AppVersionModel.version_name,
                           func.max(AppVersionModel.create_at).label('_update_at')) \
@@ -39,6 +41,10 @@ async def get_apps(request: Request, app_type: str, page: int):
         .filter(AppModel.create_at <= time)
     if app_type != 'all':  # 安装包类型过滤
         query = query.filter(AppModel.type == app_type)
+
+    if kw:
+        query = query.filter(AppModel.name.like('%{}%'.format(kw)))
+
     result = query.order_by(desc(AppModel.create_at)) \
         .group_by(AppModel.short_chain_uri_) \
         .offset((page - 1) * Config.apps_limit) \
@@ -158,3 +164,28 @@ class AppsView(HTTPMethodView):
 
 
 apps_blueprint.add_route(AppsView.as_view(), '/<app_id:int>')
+
+
+# @apps_blueprint.route('/search', ['GET'])
+# async def search(request: Request):
+#     time = Date.time2datetime(request.args.get('t'))
+#     if not time:
+#         raise BadRequest('')
+#
+#     page = request.args.get('page')
+#     if page <= 0:
+#         log.debug('page need greater zero')
+#         raise BadRequest('')
+#
+#     kw = request.args.get('kw')
+#     if not kw:
+#         raise BadRequest('')
+#
+#     app_type = request.args.get('type')
+#
+#     session = Session()
+#     session.query(AppModel).filter(AppModel.create_at <= time, AppModel.type == app_type) \
+#         .offset((page - 1) * Config.apps_limit) \
+#         .limit(Config.apps_limit) \
+#         .all()
+#     session.commit()
