@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 # Created by apple on 2017/1/30.
 
-import os
 import logging
-from subprocess import Popen
 
 
 class BaseConfig:
@@ -12,6 +10,7 @@ class BaseConfig:
     bing = '0.0.0.0'  # 绑定地址
     port = 8000  # 绑定端口
     debug = False  # 是否为测试模式
+    workers = 1  # worker数量
     url = None
 
     # static 静态uri
@@ -70,20 +69,3 @@ class ProductionConfig(BaseConfig):
 
 Config = DebugConfig
 Config.url = 'https://{}:{}'.format(Config.host, Config.port)
-
-# 创建需要的目录
-paths = [Config.data_dir, Config.app_dir, Config.log_dir, Config.icon_dir, Config.db_dir, Config.plist_dir]
-not_exists_dirs = [path for path in paths if not os.path.isdir(path)]
-for directory in not_exists_dirs:
-    os.mkdir(directory)
-
-# 创建自签证书
-pre_host = None
-if os.path.isfile(Config.host_file):
-    with open(Config.host_file) as hf:
-        pre_host = hf.read()
-
-if pre_host != Config.host or not os.path.isfile(Config.ca_file):
-    Popen('{} {} {}'.format(Config.generate_certificate_file, Config.host, Config.cer_dir), shell=True).wait()
-    with open(Config.host_file, 'wb+') as f:
-        f.write(Config.host.encode())
