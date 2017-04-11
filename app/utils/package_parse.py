@@ -2,6 +2,7 @@
 # Created by apple on 2017/1/31.
 
 import re
+import os
 import aiofiles
 import plistlib
 from .regex import Regex
@@ -143,3 +144,11 @@ class PackageParse:
     async def save_icon(self, save_path):
         async with aiofiles.open(save_path, 'wb+') as f:
             await f.write(self.zip_file.read(self.icon_path))
+            if self.app_type == AppType.iOS:
+                dirs = save_path.split('/')
+                if len(dirs) > 2:
+                    save_dir = '/'.join(dirs[:-1])
+                else:
+                    save_dir = './'
+                popen = Popen('./pngdefry -o {} {}'.format(save_dir, save_path), stdout=PIPE, shell=True)
+                popen.wait()
