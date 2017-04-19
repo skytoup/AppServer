@@ -31,19 +31,34 @@
 ## 使用
 ### 环境
 - Python > 3.5
-- macOS(其它平台尚未测试)
+- macOS 10.12+
+- centos 6+
+- ubuntu 14.04+
+- 还有其它更多尚未测试...
 
 ### 配置(app/config.py)
 把`Config`的`host`修改为本机地址
 ![配置](img/1.png)
 
 ### 运行服务器
+
+#### 源码运行
 1. `git clone https://github.com/skytoup/AppServer`
 2. `cd AppServer`
 3. `pip install -r requirements.txt # 安装依赖`
 4. `python main.py # 运行服务器`
 ![运行](img/2.png)
-5. 打开浏览器, 输入https://{Config的host}:8000, 回车
+5. `open https://your_bing_host:8000` # or 打开浏览器, 输入https://{Config的host}:8000, 回车
+
+#### Docker运行
+1. `git clone https://github.com/skytoup/AppServer`
+2. `cd AppServer`
+3. 修改`app/config/config.py:BaseConfig.host`为需要绑定的ip地址, 设置错误会导致iOS无法在线下载安装ipa
+4. `docker build -t app_server ./`
+5. `docker run -d -p 8000:8000 -v /path/to/data:/www/AppServer/data -v /path/to/log:/www/AppServer/log --name AppServer app_server` # or 
+`docker run -d -p 8000:8000 --name AppServer app_server`
+6. `open https://your_bing_host:8000` # or 打开浏览器, 输入https://{Config的host}:8000, 回车
+
 
 ### 服务器的单元测试
 1. `pip install -r requirements_test.txt`
@@ -60,6 +75,7 @@
 ### Tip
 1. 开启服务器后, 需要在地址栏输入的是**Config的host**, 不能填写127.0.0.1、localhost、0.0.0.0; 还有协议是`https`, 不是`http`
 2. `iPhone`安装ipa需要在App详情的界面里面点击安装证书, 因为证书是自己生成的, 不能免证书安装(**iOS9以上系统安装完证书后, 还需要在设置那里信任一下证书**, 请参考: [苹果iOS9系统安装应用证书信任操作指导](http://jingyan.baidu.com/article/9c69d48f98e11813c8024e77.html))
+3. `centos`和`ubuntu`安装可能出现的问题 👉 [传送门](https://github.com/skytoup/AppServer/issues/1)
 
 更详细请看 👉 [FAQ](FAQ.md)
 
@@ -214,15 +230,31 @@
 | --- | --- |
 |  |  |
 
+
+# 版本更新 👉 [传送门](VERSION.md)
+
 ## 使用的开源项目
 - [Sanic](https://github.com/channelcat/sanic): Async Python 3.5+ web server that's written to go fast
 - [shortuuid](https://github.com/skorokithakis/shortuuid): A generator library for concise, unambiguous and URL-safe UUIDs. <http://www.stavros.io/>
 - [sqlalchemy](https://github.com/zzzeek/sqlalchemy): See the development link for contribution guidelines <http://sqlalchemy.org/develop.html>
 - [aiofiles](https://github.com/Tinche/aiofiles): File support for asyncio
+- [pngdefry](http://www.jongware.com/pngdefry.html): Repairing -iPhone fried PNGs
 
 # 相关文章
 - [一个实现App在线下载、安装的工具​](http://skytoup.wicp.net/2017/03/01/%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%8E%B0App%E5%9C%A8%E7%BA%BF%E4%B8%8B%E8%BD%BD%E3%80%81%E5%AE%89%E8%A3%85%E7%9A%84%E5%B7%A5%E5%85%B7/)
 
+# 讨论&贡献
+![qq](img/qq.png)
+
 # 联系方式
 - QQ：875766917，请备注
 - Mail：875766917@qq.com
+
+# 捐献(请喝杯咖啡, 我是不会拒绝的😄)
+支付宝
+--------
+![alipay](img/alipay.png)
+
+微信
+--------
+![wx](img/wx.png)

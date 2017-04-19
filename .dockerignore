@@ -1,0 +1,10 @@
+.git
+*.md
+LICENSE
+.*
+data
+img
+log
+__pycache__/
+.idea
+Dockerfile
