@@ -27,6 +27,7 @@ RUN mkdir -p /www/AppServer
 COPY ./ /www/AppServer
 
 WORKDIR /www/AppServer
+RUN gcc vendors/pngdefry/pngdefry.c -o pngdefry
 RUN mkdir data log
 RUN python3 -m pip install -i https://pypi.douban.com/simple/ -r requirements.txt
 

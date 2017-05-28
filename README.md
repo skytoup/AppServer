@@ -45,10 +45,11 @@
 #### 源码运行
 1. `git clone https://github.com/skytoup/AppServer`
 2. `cd AppServer`
-3. `pip install -r requirements.txt # 安装依赖`
-4. `python main.py # 运行服务器`
+3. `gcc vendors/pngdefry/pngdefry.c -o pngdefry # 编译pngdfry`
+4. `pip install -r requirements.txt # 安装依赖`
+5. `python main.py # 运行服务器`
 ![运行](img/2.png)
-5. `open https://your_bing_host:8000` # or 打开浏览器, 输入https://{Config的host}:8000, 回车
+6. `open https://your_bing_host:8000` # or 打开浏览器, 输入https://{Config的host}:8000, 回车
 
 #### Docker运行
 1. `git clone https://github.com/skytoup/AppServer`
