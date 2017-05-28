@@ -72,7 +72,8 @@ class AppVersionView(HTTPMethodView):
 
         session = Session()
         # 检查是否存在该app
-        if not DB.model_exists(session, AppModel, id=app_id):
+        app_query = DB.model_exists(session, AppModel, id=app_id)
+        if not app_query:
             raise BadRequest('not find app id: {}'.format(app_id))
 
         # 检查app是否存在该版本
@@ -83,6 +84,12 @@ class AppVersionView(HTTPMethodView):
         # 删除安装包
         model = query.one()
         os.remove(model.package_)
+
+        # 是否所有版本都已经删除
+        less_query = DB.model_exists(session, AppVersionModel, app_id=app_id)
+        if less_query and less_query.count() == 1:
+            os.remove(app_query.one().icon_)
+            app_query.delete()
 
         # 删除版本
         query.delete()

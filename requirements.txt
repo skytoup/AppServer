@@ -1,7 +1,7 @@
 aiofiles==0.3.1
 httptools==0.0.9
-sanic==0.4.1
+sanic==0.5.4
 shortuuid==0.5.0
-SQLAlchemy==1.1.6
+SQLAlchemy==1.1.10
 ujson==1.35
 uvloop==0.8.0

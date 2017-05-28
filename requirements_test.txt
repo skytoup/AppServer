@@ -6,9 +6,9 @@ httptools==0.0.9
 multidict==2.1.4
 py==1.4.32
 pytest==3.0.6
-sanic==0.4.1
+sanic==0.5.4
 shortuuid==0.5.0
-SQLAlchemy==1.1.6
+SQLAlchemy==1.1.10
 ujson==1.35
 uvloop==0.8.0
 yarl==0.9.8

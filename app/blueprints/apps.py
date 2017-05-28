@@ -99,6 +99,9 @@ class AppsView(HTTPMethodView):
         if not app_query:
             raise BadRequest('not find app id: {}'.format(app_id))
 
+        # 删除图标
+        app = app_query.one()
+        os.remove(app.icon_)
         # 删除app的所有版本
         app_version_query = session.query(AppVersionModel).filter(AppVersionModel.app_id == app_id)
         for model in app_version_query.all():
