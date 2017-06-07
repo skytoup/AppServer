@@ -13,3 +13,15 @@
 ![img](img/iphone_5.png)
 3. 检查`iPhone`上安装的证书是不是旧的, 可以删除之后再安装一次
 4. `ipa`的安装包只能是是ad证书所打包出来的(企业证书也可以？没有, 没法证实, 知道的可以告诉我一下😄)
+
+## Linux上传apk一直失败
+1. 检测日志, 如果报错如下
+
+```
+./aapt_centos: error while loading shared libraries: libpng12.so.0: cannot open shared object file: No such file or directory
+```
+
+请安装`libpng12`的库:
+
+- centos: `yun install libpng12`
+- 其它待测试...

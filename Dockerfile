@@ -12,7 +12,7 @@ FROM centos:latest
 
 MAINTAINER skytoup 875766917@qq.com
 
-RUN yum -y install zlib* sqlite-devel gcc make python-setuptools openssl openssl-devel
+RUN yum -y install zlib* sqlite-devel gcc make python-setuptools openssl openssl-devel libpng12
 
 # install python3.6.1
 RUN curl -O https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tgz \

@@ -43,6 +43,9 @@
 ### 运行服务器
 
 #### 源码运行
+	# linux系统请注意, 需要安装libpng12(centos已测试, 其它系统还没测试), MacOSX系统不需要
+	`yum install libpng12` # centos
+
 1. `git clone https://github.com/skytoup/AppServer`
 2. `cd AppServer`
 3. `gcc vendors/pngdefry/pngdefry.c -o pngdefry # 编译pngdfry`
@@ -77,6 +80,7 @@
 1. 开启服务器后, 需要在地址栏输入的是**Config的host**, 不能填写127.0.0.1、localhost、0.0.0.0; 还有协议是`https`, 不是`http`
 2. `iPhone`安装ipa需要在App详情的界面里面点击安装证书, 因为证书是自己生成的, 不能免证书安装(**iOS9以上系统安装完证书后, 还需要在设置那里信任一下证书**, 请参考: [苹果iOS9系统安装应用证书信任操作指导](http://jingyan.baidu.com/article/9c69d48f98e11813c8024e77.html))
 3. `centos`和`ubuntu`安装可能出现的问题 👉 [传送门](https://github.com/skytoup/AppServer/issues/1)
+4. `linux`运行`aapt`需要安装`libpng12`, centos: `yum install libpng12`
 
 更详细请看 👉 [FAQ](FAQ.md)
 

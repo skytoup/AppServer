@@ -2,14 +2,16 @@
 # Created by apple on 2017/1/31.
 
 import re
-import os
 import aiofiles
 import plistlib
+from platform import system
 from .regex import Regex
 from ..log import log
 from zipfile import ZipFile
 from subprocess import Popen, PIPE
 from ..db import AppType
+
+aapt = './aapt_mac' if system() == 'Darwin' else './aapt_centos'
 
 
 class PackageParse:
@@ -36,7 +38,7 @@ class PackageParse:
         :param file_path: apk路径
         :return: string
         """
-        popen = Popen('./aapt dump badging {}'.format(file_path), stdout=PIPE, shell=True)
+        popen = Popen('{} dump badging {}'.format(aapt, file_path), stdout=PIPE, shell=True)
         result = popen.communicate()[0]
         return result.decode()
 
