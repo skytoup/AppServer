@@ -21,6 +21,10 @@ app.blueprint(exception_blueprint)
 app.blueprint(short_chain_blueprint)
 app.static(Config.static_html, Config.html_dir)
 
+# app setting
+app.config.REQUEST_MAX_SIZE = 1024 * 1024 * 512  # 512M
+app.config.REQUEST_TIMEOUT = 60 * 10  # 10m
+
 
 @app.route('/')
 async def index(request: Request):

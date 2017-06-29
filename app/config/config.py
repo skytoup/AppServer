@@ -6,7 +6,7 @@ import logging
 
 class BaseConfig:
     # server config
-    host = '10.0.1.90'  # 服务器访问地址
+    host = '10.0.1.85'  # 服务器访问地址
     bing = '0.0.0.0'  # 绑定地址
     port = 8000  # 绑定端口
     debug = False  # 是否为测试模式
